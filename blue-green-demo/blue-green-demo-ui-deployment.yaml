@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-green-demo-ui
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: blue-green-demo-ui
+  template:
+    metadata:
+      labels:
+        app: blue-green-demo-ui
+    spec:
+      containers:
+        - image: argoproj/rollouts-demo:blue
+          name: blue-green-demo-ui
+          ports:
+            - containerPort: 80
